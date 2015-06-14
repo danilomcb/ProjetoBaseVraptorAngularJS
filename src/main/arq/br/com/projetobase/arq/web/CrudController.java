@@ -5,7 +5,6 @@ import java.util.Collection;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Get;
@@ -28,20 +27,11 @@ public abstract class CrudController<T extends AbstractEntity> extends AbstractC
 	@Consumes("application/json")
 	@Post
 	@Transactional
-	public void editarJson(T entidade) {
+	public void editar(T entidade) {
 		T entidadePersistida = getRepository().find(entidade.getId());
 		result.use(Results.json()).withoutRoot().from(entidadePersistida).serialize();
 	}
 	
-	@Post
-	@Transactional
-	public void salvar(@NotNull @Valid T entidade) {
-		validator.validate(entidade);
-		validator.onErrorUsePageOf(this).form();
-		persistirEntidade(entidade);
-		result.redirectTo(this).list();
-	}
-
 	private void persistirEntidade(T entidade) {
 		if (entidade.getId() != null && entidade.getId() != 0) {
 			getRepository().update(entidade);
@@ -53,31 +43,20 @@ public abstract class CrudController<T extends AbstractEntity> extends AbstractC
 	@Consumes("application/json")
 	@Post
 	@Transactional
-	public void salvarJson(@Valid T entidade) {
-		validator.validate(entidade);
+	public void salvar(@Valid T entidade) {
 		validator.onErrorSendBadRequest();
 		persistirEntidade(entidade);
 		Collection<T> entidadesPersistidas = getRepository().all();
 		result.use(Results.json()).withoutRoot().from(entidadesPersistidas).serialize();
 	}
 	
-	public T show(T entidade) {
-		T entity = getRepository().find(entidade.getId());
-		return entity;
-	}
-		
 	@Consumes("application/json")
 	@Post
 	@Transactional
-	public void removerJson(T entidade) {
+	public void remover(T entidade) {
 		getRepository().remove(entidade);
 		Collection<T> entidadesPersistidas = getRepository().all();
 		result.use(Results.json()).withoutRoot().from(entidadesPersistidas).serialize();
-	}
-	
-	public void list() {
-		Collection<T> entidadesCadastradas = getRepository().all();
-		result.include("entidades", entidadesCadastradas);
 	}
 	
 	@Consumes("application/json")
