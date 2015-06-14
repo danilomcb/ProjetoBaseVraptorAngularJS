@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
@@ -25,14 +24,7 @@ public abstract class CrudController<T extends AbstractEntity> extends AbstractC
 	
 	public void form() {
 	}
-	
-	@Get
-	@Path("/form/{entidade.id}")
-	public void form(T entidade) {
-		T entidadePersistida = getRepository().find(entidade.getId());
-		result.include("entidade", entidadePersistida);
-	}
-	
+		
 	@Consumes("application/json")
 	@Post
 	@Transactional
@@ -73,15 +65,7 @@ public abstract class CrudController<T extends AbstractEntity> extends AbstractC
 		T entity = getRepository().find(entidade.getId());
 		return entity;
 	}
-	
-	@Path("/remover/{entidade.id}")
-	@Get
-	@Transactional
-	public void remover(T entidade) {
-		getRepository().remove(entidade);
-		result.redirectTo(this).list();
-	}
-	
+		
 	@Consumes("application/json")
 	@Post
 	@Transactional

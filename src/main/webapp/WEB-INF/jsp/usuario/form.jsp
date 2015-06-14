@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<script src="<c:url value= "/resources/js/angular.js" />"></script>
+<script src="<c:url value='/resources/js/pages/usuario/usuarioController.js' />"></script>
+
 <div class="container" ng-controller="usuarioContoller">
 	<div class="block">
 		<div class="navbar navbar-inner block-header">
@@ -85,6 +88,3 @@
 	</div>
 </div>
 
-
-<script src="<c:url value= "/resources/js/angular.js" />"></script>
-<script src="<c:url value='/resources/js/pages/usuario/usuarioController.js' />"></script>

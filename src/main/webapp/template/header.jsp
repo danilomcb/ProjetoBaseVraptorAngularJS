@@ -17,7 +17,7 @@
 						<li><a href="<c:url value = "/login/sair"/>"><fmt:message	key="sair" /></a></li>
 					</ul>
 					<ul class="nav">
-						<li class="${activeHome}"><a href="#"><fmt:message key = "home"/></a></li>
+						<li class="${activeHome}"><a href="${ctx}"><fmt:message key = "home"/></a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								<fmt:message key="usuario" /> <span class="caret"></span>
