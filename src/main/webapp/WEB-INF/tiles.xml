@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions [
+        <!ELEMENT tiles-definitions (definition)*>
+        <!ELEMENT definition (put-attribute)*>
+        <!ATTLIST definition
+                extends CDATA #IMPLIED
+                name CDATA #REQUIRED
+                template CDATA #IMPLIED>
+        <!ELEMENT put-attribute (#PCDATA)>
+        <!ATTLIST put-attribute
+                name CDATA #REQUIRED
+                value CDATA #REQUIRED>
+        ]>
+<tiles-definitions>
+
+    <definition name="master.page" template="/template/master.jsp">
+    	<put-attribute name = "title" value = "Projeto Base VRaptor" />
+    	<put-attribute name = "header" value = "/template/header.jsp"></put-attribute>
+    	<put-attribute name = "footer" value = "/template/footer.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="index/index" extends="master.page">
+    	<put-attribute name = "body" value = "/WEB-INF/jsp/index/index.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="usuario/form" extends="master.page">
+    	<put-attribute name = "body" value = "/WEB-INF/jsp/usuario/form.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="usuario/list" extends="master.page">
+    	<put-attribute name = "body" value = "/WEB-INF/jsp/usuario/list.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="login/form" extends="master.page">
+    	<put-attribute name = "header" value = ""></put-attribute>
+    	<put-attribute name = "footer" value = ""></put-attribute>
+    	<put-attribute name = "body" value = "/WEB-INF/jsp/login/form.jsp"></put-attribute>
+    </definition>
+</tiles-definitions>

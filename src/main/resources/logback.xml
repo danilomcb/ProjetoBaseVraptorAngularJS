@@ -1,0 +1,71 @@
+<configuration scan="true" scanPeriod="60 seconds" >
+
+	<logger name="javax.enterprise" level="DEBUG" />
+    <logger name="org.hibernate" level="WARN" />
+	<!-- C3p0 -->
+    <logger name="com.mchange" level="WARN" />
+    
+    <logger name="br.com.caelum.vraptor" level="INFO" />
+    <logger name="org.apache" level="INFO" />
+    <logger name="ch.qos.logback" level="WARN" />
+    <logger name="org.jboss" level="INFO" />	
+     
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss}; [%thread]; %-5level; %logger{36}; %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILE_FULL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/log-full.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>logs/log-full.%d{dd-MM-yyyy}.zip
+			</fileNamePattern>
+
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>20MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{HH:mm:ss}; [%thread]; %-5level; %logger{36}; %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="FILE_FILTER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="br.com.projetobase.arq.log.FilterPackageLog" />
+		<file>logs/log.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>logs/log.%d{dd-MM-yyyy}.zip
+			</fileNamePattern>
+
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>20MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{HH:mm:ss}; [%thread]; %-5level; %logger{36}; %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+    <root level="DEBUG">
+		<appender-ref ref="FILE_FULL" />
+	</root>
+	<root level="DEBUG">
+		<appender-ref ref="FILE_FILTER" />
+	</root>
+    
+</configuration>
