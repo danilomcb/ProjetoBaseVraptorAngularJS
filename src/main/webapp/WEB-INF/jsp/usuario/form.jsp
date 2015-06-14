@@ -2,11 +2,10 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <script src="<c:url value= "/resources/js/angular.js" />"></script>
 <script src="<c:url value='/resources/js/pages/usuario/usuarioController.js' />"></script>
 
-<div class="container" ng-controller="usuarioContoller">
+<div class="container" ng-controller="usuarioController">
 	<div class="block">
 		<div class="navbar navbar-inner block-header">
 			<div class="muted pull-left">
@@ -14,12 +13,9 @@
 			</div>
 		</div>
 		<div class="block-content collapse in">
-			<div class="alert alert-error" ng-hide = "mostrarMensagensDeErro()">
-				<a class="close" data-dismiss="alert" href="#"/>×</a>
-				<div ng-repeat="erro in erros">		
-					{{erro.message}}<br/>
-				</div>
-			</div>
+			
+			<c:import url="${ctx}/template/mensagens.jsp" />
+			
 			<form>
 				<input id="entidadeId" type="hidden" ng-model = "entidade.id"/>
 				<fieldset>

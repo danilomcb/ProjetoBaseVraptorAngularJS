@@ -1,6 +1,6 @@
 var myApp = angular.module('projetoBase',[]);
 
-myApp.controller('usuarioContoller', function($scope, $window, $http) {
+myApp.controller('usuarioController', function($scope, $window, $http) {
 	
 	$scope.hide_mensagem_empty_table = function(entidades) {
 		if (entidades.length == 0) {
@@ -8,6 +8,10 @@ myApp.controller('usuarioContoller', function($scope, $window, $http) {
 		} else {
 			return false;
 		}
+	}
+	
+	$scope.fecharMensagemDeErro = function() {
+		$scope.erros = [];
 	}
 	
 	$scope.mostrarMensagensDeErro = function() {
@@ -29,7 +33,7 @@ myApp.controller('usuarioContoller', function($scope, $window, $http) {
 
     $scope.salvarEntidade = function () {
     	var entidadeJson = angular.toJson({entidade : $scope.entidade});
-    	$http.post(_contextPath + '/usuario/salvarJson', entidadeJson).success(function(data) {
+    	$http.post(_contextPath + '/usuario/salvar', entidadeJson).success(function(data) {
     		$scope.entidades = data;
     		$scope.erros = [];
     		reset();
@@ -41,7 +45,7 @@ myApp.controller('usuarioContoller', function($scope, $window, $http) {
     
     $scope.editarEntidade = function (entidade) {
     	var entidadeJson = angular.toJson({entidade :{id: entidade.id}});
-    	$http.post(_contextPath + '/usuario/editarJson', entidadeJson).success(function(data) {
+    	$http.post(_contextPath + '/usuario/editar', entidadeJson).success(function(data) {
     		$scope.entidade = data;
     		$scope.erros = [];
     	}).error(function(data) {
@@ -52,7 +56,7 @@ myApp.controller('usuarioContoller', function($scope, $window, $http) {
     $scope.removerEntidade = function (entidade) {
     	var entidadeJson = angular.toJson({entidade :{id: entidade.id}});
     	var confirmar = $window.confirm('Deseja remover ' + entidade.nome + '?');
-    	$http.post(_contextPath + '/usuario/removerJson', entidadeJson).success(function(data) {
+    	$http.post(_contextPath + '/usuario/remover', entidadeJson).success(function(data) {
     		$scope.entidades = data;
     	});
     };

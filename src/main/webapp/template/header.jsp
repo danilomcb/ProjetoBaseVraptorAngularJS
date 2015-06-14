@@ -24,7 +24,6 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value="/usuario/form"/>"><fmt:message key = "form"/></a></li>
-								<li><a href="<c:url value="/usuario/list"/>"><fmt:message key = "lista"/></a></li>
 							</ul>
 						</li>
 					</ul>
